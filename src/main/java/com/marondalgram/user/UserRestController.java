@@ -3,11 +3,15 @@ package com.marondalgram.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.marondalgram.common.EncryptUtils;
 import com.marondalgram.user.bo.UserBO;
 import com.marondalgram.user.model.User;
 
@@ -27,20 +31,26 @@ public class UserRestController {
 	public Map<String, Object>  signIn(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
-			){
+			, HttpServletRequest request){
 		Map<String, Object> result = new HashMap<>();
 		
-		// TODO: password 해싱해야 한다
+		String encryptPassword = EncryptUtils.md5(password);
 		
-		User user = userBO.getUserByLoginIdAndPassword(loginId, password);
-		if(user != null) { //################# 이게 되나 ? 
+		User user = userBO.getUserByLoginIdAndPassword(loginId, encryptPassword);
+		if(user != null) { 
 			result.put("result", "success");
+				
+			//로그인 처리 - 세션에 저장(로그인 상태 유지)	//controller에서 사용할 수도 있고 jsp에서 사용할 수도 있다.
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
 		} else {
 			result.put("result", "error");
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 회원가입
 	 * @param loginId
@@ -49,6 +59,7 @@ public class UserRestController {
 	 * @param phoneNumber
 	 * @param birth
 	 * @param gender
+	 * @param email
 	 * @return
 	 */
 	@PostMapping("/user/sign_up")
@@ -63,13 +74,16 @@ public class UserRestController {
 			){
 		Map<String, Object> result = new HashMap<>();
 		
-		//TODO: 비밀번호 해싱 후 저장하기
-			
-		userBO.insertUser(loginId, password, name, phoneNumber, birth, gender, email);
+		//비밀번호 해싱하기
+		String encryptPassword = EncryptUtils.md5(password);
+		
+		userBO.insertUser(loginId, encryptPassword, name, phoneNumber, birth, gender, email);
 		result.put("result", "success");
 		
 		return result;
 	}
+	
+	//TODO : logout이 필요하다
 	
 
 }

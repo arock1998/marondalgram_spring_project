@@ -28,9 +28,10 @@
 					, data : {'loginId': loginId, 'password': password}
 					, success : function(data){
 						if(data.result == 'success'){
-							alert('ajax통신에 성공 하였습니다.');
+							alert('로그인 성공');
+							location.href="/timeline/timeline"
 						} else {
-							alert('아이디와 비밀번호를 확인해주세요.');
+							alert('로그인 정보가 정확하지 않습니다.');
 						}
 					}
 					, error : function(e){

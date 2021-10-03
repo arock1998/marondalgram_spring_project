@@ -27,14 +27,15 @@
 	<body>
 		<div class="container">
 			<header class="d-flex justify-content-center">
-				<h1 class="font-weight-bold m-3">marondalgram</h1>
+				<jsp:include page="../include/gnb.jsp"></jsp:include>
 			</header>
 			
 			<section class="d-flex justify-content-center">
 				<jsp:include page="../${viewName }.jsp"></jsp:include>
 			</section>
-			
-			<footer></footer>
+			<footer>
+				<jsp:include page="../include/footer.jsp"></jsp:include>
+			</footer>
 		</div>
 	</body>
 </html>

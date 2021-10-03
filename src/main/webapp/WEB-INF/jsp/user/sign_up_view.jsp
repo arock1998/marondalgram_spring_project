@@ -80,8 +80,6 @@
 			}
 			
 			
-			alert('모든 validation이 끝났고 통신가능합니다.' );
-			
 			
  			$.ajax({
 				type:'post'
@@ -91,18 +89,7 @@
 				, success : function(data){
 					if(data.result == 'success'){
 						alert('회원가입에 성공했습니다.');
-						
-						
-						
-						
-						
-							/* location.href ="####### timeline page로 이동 ########" */
-							
-							
-							
-							
-							
-							
+							location.href ="/timeline/timeline"
 					} else {
 						alert('회원가입에 실패했습니다.');
 					}

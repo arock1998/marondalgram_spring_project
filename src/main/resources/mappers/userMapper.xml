@@ -18,7 +18,7 @@
 		FROM
 			`user`
 		WHERE 
-			`loginId` = #{loginId} AND `loginId` = #{password}
+			`loginId` = #{loginId} AND `password` = #{password}
 	</select>
 	
 	<insert id="insertUser" parameterType="map">
