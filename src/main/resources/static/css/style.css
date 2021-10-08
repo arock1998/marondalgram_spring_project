@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+	section>#loginBox {
+		width: 500px;
+		height: 500px;
+	}
+	section>#signUpBox {
+		width: 500px;
+		height: 500px;
+	}
+	#postCreateBox {
+		 width:492px;
+		 height:521px;
+	}
+	#postCreateImageBox{
+		width:350px;
+		 height:200px;
+	}

@@ -28,12 +28,10 @@ public class TimelineController {
 			 , HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		
 		if(userId == null) {
 			logger.info("[timeline/timeline] userId is null" + userId);
 			return "redirect:/user/sign_in_view";
 		}
-		
 		List<Post> postList = postBO.getPostList(userId);
 		
 		model.addAttribute("viewName", "timeline/timeline");

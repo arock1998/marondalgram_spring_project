@@ -13,8 +13,27 @@
 			, `updatedAt`
 		FROM
 			`post`
-		WHERE 
-			`userId` = #{userId}
+		<!--  WHERE 
+			`userId` = #{userId} -->
 	</select>
+	
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO `post`
+		(
+			`userId`
+			, `imageURL`
+			, `description`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES 
+		(
+			#{userId}
+			, #{imageURL}
+			, #{description}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 	
 </mapper>
