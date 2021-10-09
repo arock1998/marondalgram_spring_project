@@ -16,18 +16,18 @@ import com.marondalgram.post.model.Post;
 
 @Service
 public class PostBO {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired 
 	private PostDAO postDAO;
 	@Autowired
 	private FileManagerService fileManagerService;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public List<Post> getPostList(int userId){
 		return postDAO.selectPostList(userId);
 	}
 	
-	public int createPost(int userId, String description, MultipartFile file){
+	public int createPost(int userId, String userName, String description, MultipartFile file){
 		String imageURL = null;
 		if(file == null) {
 			logger.error("[ ### 글 생성]: file is null");
@@ -40,7 +40,7 @@ public class PostBO {
 				logger.error(" ###[post BO] 이미지 업로드 실패");
 			}
 		}
-		return postDAO.insertPost(userId, description, imageURL); 
+		return postDAO.insertPost(userId, userName, description, imageURL); 
 	}
 	
 	

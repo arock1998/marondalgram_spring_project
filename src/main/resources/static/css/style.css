@@ -13,7 +13,7 @@
 		 height:521px;
 	}
 	#postCreateImageBox{
-		width:500px;
+		width:800px;
 		 height:491px;
 	}
 	
@@ -22,7 +22,18 @@
 		 height:491px;
 	}
 	
-	#postImageBox{
-		width:450px;
-		height:300px;
+	.timeline{
+		width:800px;
 	}
+	
+	.postImageBox{
+		height:428px;
+		width:640px;
+	}
+	
+	.postProfileImage {
+		height:60px;
+		width:60px;
+	}
+	
+	

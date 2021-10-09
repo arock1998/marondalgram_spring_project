@@ -32,7 +32,7 @@ public class TimelineController {
 		}
 		
 		//타임라인에서 contentView 받아오기
-		model.addAttribute("contents", contentBO.generateContentViewListById(userId));
+		model.addAttribute("contentList", contentBO.generateContentViewListById(userId));
 		model.addAttribute("viewName", "timeline/timeline2");
 //		List<Post> postList = postBO.getPostList(userId);
 //		model.addAttribute("postList", postList);

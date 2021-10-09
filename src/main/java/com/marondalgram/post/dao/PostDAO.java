@@ -14,6 +14,7 @@ public interface PostDAO {
 	
 	public int insertPost(
 			@Param("userId") int userId
+			, @Param("userName") String userName
 			, @Param("description") String  description
 			, @Param("imageURL") String imageURL);
 }

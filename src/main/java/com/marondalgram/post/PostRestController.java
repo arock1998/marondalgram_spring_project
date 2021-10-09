@@ -36,12 +36,16 @@ public class PostRestController {
 			, @RequestParam("file") MultipartFile file
 			, HttpServletRequest request
 			){
-		Map<String, Object> result = new HashMap<>();
-		result.put("result", "error");
 		//세션에서 user id가져오기
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		int row = postBO.createPost(userId, description, file);
+		String userName = (String)session.getAttribute("userName"); 
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "error");
+		
+		//DB에 view에서 받아온 정보 보내주기
+		int row = postBO.createPost(userId, userName, description, file);
 		if(row > 0) {
 			result.put("result", "success");
 		}

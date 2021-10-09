@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marondalgram.comment.bo.CommentBO;
+import com.marondalgram.comment.model.Comment;
 import com.marondalgram.like.bo.LikeBO;
 import com.marondalgram.post.bo.PostBO;
 import com.marondalgram.post.model.Post;
 import com.marondalgram.timeline.model.ContentView;
-import com.marondalgram.user.bo.UserBO;
 
 @Service
 public class ContentBO {
 	
-	@Autowired
-	private UserBO userBO;
-
 	@Autowired
 	private PostBO postBO;
 
@@ -36,11 +33,12 @@ public class ContentBO {
 		for (Post post : postList) {
 			ContentView content = new ContentView();
 			content.setPost(post);
-
 			int postId = post.getId();
-//			likeBO.좋아요눌렸는가(postId);
-//			commentBO.댓글리스트를가지고오자(postId);
 
+//			likeBO.좋아요눌렸는가(postId);
+			List<Comment> commentList = commentBO.getCommentList(postId);
+			content.setCommentList(commentList);
+			
 			contentViewList.add(content);
 		}
 		return contentViewList;

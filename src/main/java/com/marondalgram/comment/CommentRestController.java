@@ -9,27 +9,29 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.marondalgram.comment.bo.CommentBO;
 
-@Controller
+@RestController
 public class CommentRestController {
 	@Autowired
 	private CommentBO commentBO;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
-	@RequestMapping("/comment/create")
+	@PostMapping("/comment/create")
 	public Map<String, Object> createComment(
 			@RequestParam("postId") int postId
 			, @RequestParam("comment") String comment 
 			, HttpServletRequest request
 			){
+		//접근할 수 있는지 확인
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
+		String userName = (String) session.getAttribute("userName");
 		if(userId == null) {
 			logger.error("[###createComment] createComment userId가 null이다");
 		}
@@ -37,8 +39,9 @@ public class CommentRestController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
 		
-		
-		
+		commentBO.createComment(userId, userName, postId, comment);
+		result.put("result", "success");
+
 		return result;
 	}
 }

@@ -23,6 +23,7 @@
 			
 			
 		});
+		
 		//파일 저장 버튼 클릭
 		$(document).ready(function(){
 			$('#saveBtn').on('click', function(){

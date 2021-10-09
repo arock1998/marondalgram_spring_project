@@ -21,11 +21,11 @@ public class PostController {
 	public String postCreateView(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
+		
 		if (userId == null) {
 			return "redirect:/user/sign_in_view";
 		}
 		model.addAttribute("viewName", "post/post_create");
 		return "template/layout";
 	}
-	
 }

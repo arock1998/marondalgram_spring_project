@@ -1,14 +1,14 @@
-package com.marondalgram.post.model;
+package com.marondalgram.comment.model;
 
 import java.util.Date;
 
-public class Post {
+public class Comment {
 
 	private int id;
 	private int userId;
 	private String userName;
-	private String imageURL;
-	private String description;
+	private int postId;
+	private String comment;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -30,17 +30,17 @@ public class Post {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getImageURL() {
-		return imageURL;
+	public int getPostId() {
+		return postId;
 	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
-	public String getDescription() {
-		return description;
+	public String getComment() {
+		return comment;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -54,7 +54,4 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
-	
 }

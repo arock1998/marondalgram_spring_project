@@ -7,6 +7,7 @@
 		SELECT 
 			`id`
 			, `userId`
+			, `userName`
 			, `imageURL`
 			, `description`
 			, `createdAt`
@@ -15,20 +16,24 @@
 			`post`
 		<!--  WHERE 
 			`userId` = #{userId} -->
+		ORDER BY 
+			`createdAt` DESC
 	</select>
 	
 	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`
 		(
 			`userId`
+			, `userName`
 			, `imageURL`
 			, `description`
 			, `createdAt`
 			, `updatedAt`
 		)
-		VALUES 
+		VALUE
 		(
 			#{userId}
+			, #{userName}
 			, #{imageURL}
 			, #{description}
 			, NOW()
