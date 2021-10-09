@@ -74,35 +74,5 @@
 
 </script>
 
-<!-- https://github.com/marobiana/spring_project_marondalgram/blob/master/src/main/webapp/WEB-INF/jsp/timeline/timeline.jsp 를 참고하도록 -->
-	<!--  사용자가 파일 업로드를 했을 때 유효성 확인 및 업로드 된 파일 이름을 노출
-	$('#file').on('change', function(e) {
-		//변화된 타겟의 이름 가져오기
-		var name = e.target.files[0].name;
-		
-		
-		// 확장자 유효성 확인
-		var extension = name.split('.');
-		if (extension.length < 2 || 
-		 	(extension[extension.length - 1] != 'gif' 
-		 	&& extension[extension.length - 1] != 'png' 
-		 	&& extension[extension.length - 1] != 'jpg'
-		 	&& extension[extension.length - 1] != 'jpeg')) {
-		 	
-		 	alert("이미지 파일만 업로드 할 수 있습니다.");
-		 	$(this).val(""); // 이미 올라간 것을 확인한 것이기 때문에 비워주어야 한다.
-		 	$('#fileName').text('');	//잘못된 파일 명도 비워준다.
-		 	return;
-		 }
-		 
-		 //확장자 유호셩 확인 (2)
-		 let fileNameArr = fileName.split('.');
-		 if( fileNameArr[fileNameArr.length - 1] != 'png' ){
-		 		
-		 }
-		 
-		 $("#fileName").text(name);
-	}); -->
-
     
     

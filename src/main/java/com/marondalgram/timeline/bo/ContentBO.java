@@ -1,29 +1,51 @@
 package com.marondalgram.timeline.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marondalgram.comment.bo.CommentBO;
+import com.marondalgram.like.bo.LikeBO;
 import com.marondalgram.post.bo.PostBO;
+import com.marondalgram.post.model.Post;
 import com.marondalgram.timeline.model.ContentView;
+import com.marondalgram.user.bo.UserBO;
 
 @Service
 public class ContentBO {
+	
+	@Autowired
+	private UserBO userBO;
 
 	@Autowired
 	private PostBO postBO;
-	
-//	@Autowired
-//	private CommentBO commentBO;
-//	
-//	@Autowired
-//	private List<ContentView> generateContentViewList(){
-		
-//	}
-	
-	
-	
+
+	@Autowired
+	private LikeBO likeBO;
+
+	@Autowired
+	private CommentBO commentBO;
+
+	public List<ContentView> generateContentViewListById(int userId) {
+
+		List<ContentView> contentViewList = new ArrayList<>();
+		List<Post> postList = postBO.getPostList(userId);
+
+		for (Post post : postList) {
+			ContentView content = new ContentView();
+			content.setPost(post);
+
+			int postId = post.getId();
+//			likeBO.좋아요눌렸는가(postId);
+//			commentBO.댓글리스트를가지고오자(postId);
+
+			contentViewList.add(content);
+		}
+		return contentViewList;
+	}
+
 //	public List<ContentView> generateContentViewList() {
 //		for(Post post: postList)
 //		{
@@ -47,7 +69,5 @@ public class ContentBO {
 //			
 //		}
 //	}
-	
-	
-	
+
 }

@@ -1,14 +1,15 @@
 package com.marondalgram.timeline.model;
 
 import com.marondalgram.post.model.Post;
+import com.marondalgram.user.model.User;
 
 public class ContentView {
 	
 	
     //List<ContentView> 뷰를 위해서 가공되엉 있는 객체
     //Entity: DB랑 1:1 매핑이 되는 객체
-    
-//   contentBo를 따로 만든다.
+	
+	private User user;
 	
 	//글 1개
 	private Post post;
@@ -22,5 +23,29 @@ public class ContentView {
 	
 	//좋아요 총 개수
 	private int likeCount;
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public boolean isLikeYn() {
+		return likeYn;
+	}
+
+	public void setLikeYn(boolean likeYn) {
+		this.likeYn = likeYn;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	
 }
