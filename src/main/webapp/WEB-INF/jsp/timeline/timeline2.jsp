@@ -14,11 +14,14 @@
  	<div>
  		<a href="/post/create_view" class="btn btn-secondary">글 작성하기!</a> 
  	</div>
-<!--  -->
+<!--게시글이 존재 하는 부분이다 -->
 	<div class="center-block contents">
 		<c:forEach items="${contentList}" var="content">
 			<div class="postContentBox m-5 p-3 rounded border border-primary">
-				<div class="postImageBox text-center">
+				<a class="contentMenuBtn" href="#" data-post-id="${content.post.id }" data-toggle="modal" data-target="#exampleModal">
+					<img src="/images/icon/menu.png" class="float-right d-block" alt="" width="40px">
+				</a>
+				<div class="postImageBox text-center mt-2">
 					<img src="${content.post.imageURL}" alt="####TODO 유저아이디 정보를 같이 가져오는 것도 괜찮겠다."
 					  class="h-100">
 					  <!-- ###TODO 이미지가 가운데로 오지 않는다...  -->
@@ -48,8 +51,26 @@
 	</div>
  </div>
  
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
  <script>
  	$(document).ready(function(){
+ 		// 댓글 쓰기
  		$('.postComentSaveBtn').on('click', function(){
  			let postId = $(this).data('post-id');
  			var comment = $(this).siblings('input').val().trim();
@@ -72,6 +93,31 @@
  				}
  			});
  		});
+ 		
+ 		//게시글 메뉴 선택
+ 		$('#######').on('click', function(e){
+ 			e.preventdefault();
+ 			let postId = $(this).data('post-id');
+ 			
+ 			$.ajax({
+ 				type: 'delete'
+ 				, url: '/post/delete'
+ 				, data: {'postId': postId}
+ 				, success: function(data){
+ 					if(data.result == 'success'){
+ 						location.reload();
+ 					}
+ 				}
+ 				, error{
+					alert('error 삭제에 실패했습니다. 관리자에게 문의해 주세요' + e); 					
+ 				}
+ 			});
+ 			
+ 		
+ 			
+ 		});
+ 		
+ 		
  	});
  
  

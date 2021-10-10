@@ -52,4 +52,18 @@ public class PostRestController {
 		return result;
 	}
 	
+	//게시글 삭제
+	@RequestMapping("/post/delete")
+	public Map<String, Object> postDelete( @RequestParam("postId") int postId ){
+		Map<String, Object> result =  new HashMap<>();
+		
+		
+		postBO.deletePost(postId);
+		result.put("result", "success");
+		
+		
+		return result;
+	}
+	
+	
 }

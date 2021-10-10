@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.marondalgram.comment.bo.CommentBO;
 import com.marondalgram.common.FileManagerService;
-import com.marondalgram.common.FileManagerService;
+import com.marondalgram.like.bo.LikeBO;
 import com.marondalgram.post.dao.PostDAO;
 import com.marondalgram.post.model.Post;
 
@@ -19,6 +20,10 @@ public class PostBO {
 
 	@Autowired 
 	private PostDAO postDAO;
+	@Autowired
+	private CommentBO commentBO;
+	@Autowired
+	private LikeBO likeBO;
 	@Autowired
 	private FileManagerService fileManagerService;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,6 +46,13 @@ public class PostBO {
 			}
 		}
 		return postDAO.insertPost(userId, userName, description, imageURL); 
+	}
+	
+	public void deletePost(int postId) {
+		postDAO.deletePost(postId);
+		commentBO.deleteCommentByPostId(postId);
+		likeBO.deleteLikeByPostId(postId);
+		
 	}
 	
 	

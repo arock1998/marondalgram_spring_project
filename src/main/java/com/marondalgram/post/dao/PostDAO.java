@@ -17,4 +17,6 @@ public interface PostDAO {
 			, @Param("userName") String userName
 			, @Param("description") String  description
 			, @Param("imageURL") String imageURL);
+	
+	public void deletePost(int postId);
 }
