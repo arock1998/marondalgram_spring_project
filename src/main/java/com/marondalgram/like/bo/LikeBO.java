@@ -11,6 +11,21 @@ public class LikeBO {
 	@Autowired
 	private LikeDAO likeDAO;
 	
+	public boolean getLike(int userId, int postId) {
+		int result =  likeDAO.selectLike(userId, postId);
+		return result > 0 ? true : false;
+	}
+	
+	public boolean likeChange(int userId, int postId, boolean likeYn) {
+		int result = 0;
+		if(likeYn) {
+			result = likeDAO.deleteLikeByUserIdAndPostId(userId, postId);
+		} else if (likeYn == false) {
+			result = likeDAO.insertLikeByUserIdAndPostID(userId, postId);
+		}
+		return result > 0 ? true : false;
+	}
+	
 	public void deleteLikeByPostId(int postId) {
 		likeDAO.deleteLikeByPostId(postId);
 	}

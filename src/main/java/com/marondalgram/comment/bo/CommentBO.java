@@ -15,7 +15,6 @@ public class CommentBO {
 	private CommentDAO commentDAO;
 	
 	public List<Comment> getCommentList(int postId){
-		
 		return commentDAO.selectCommentList(postId);
 	}
 	

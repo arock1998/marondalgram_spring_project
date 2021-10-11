@@ -35,6 +35,17 @@
 						<span class="font-weight-bold h5">${content.post.userName}</span><br>
 						<small>${content.post.description}</small>
 					</div>
+					<!-- 좋아요 -->
+					<div>
+					<a href="#" data-post-id=${content.post.id } data-like-yn="${content.likeYn}" class="likeBtn">
+						<c:if test="${content.likeYn eq false}">
+							<img src="/images/icon/binheart.png" class="binHeart" width="80px">
+						</c:if>
+						<c:if test="${content.likeYn eq true}">
+							<img src="/images/icon/fillheart.png" class="fillHeart" width="80px">
+						</c:if>
+					</a>
+					</div>
 				</div>
 			<!-- 댓글 창 -->
 				<c:forEach items="${content.commentList }" var="comment">
@@ -74,11 +85,9 @@
  		$('.postComentSaveBtn').on('click', function(){
  			let postId = $(this).data('post-id');
  			var comment = $(this).siblings('input').val().trim();
-			
  			if(comment == ''){
  				return;
  			}
- 			
  			$.ajax({
  				type:'post'
  				, url: '/comment/create'
@@ -94,8 +103,28 @@
  			});
  		});
  		
- 		//게시글 메뉴 선택
- 		$('#######').on('click', function(e){
+ 	//좋아요 클릭
+ 		$('.likeBtn').on('click', function(e){
+ 			e.preventDefault();
+ 			let postId = $(this).data('post-id');
+ 			var likeYn = $(this).data('like-yn');
+ 			$.ajax({
+ 				type:'post'
+ 				, url: '/like/change'
+ 				, data: {'postId':postId, "likeYn": likeYn}
+ 				, success: function(data){
+ 					if(data.result == 'success'){
+ 			 			location.reload();
+ 					}
+ 				} 
+ 				, error: function(e){
+ 					alert('error:' + e + "관리자에게 문의해주세요" );
+ 				}
+ 			});
+ 		});
+ 		
+ 		//게시글 메뉴 삭제
+/*  		$('#######').on('click', function(e){
  			e.preventdefault();
  			let postId = $(this).data('post-id');
  			
@@ -112,14 +141,8 @@
 					alert('error 삭제에 실패했습니다. 관리자에게 문의해 주세요' + e); 					
  				}
  			});
- 			
- 		
- 			
- 		});
- 		
- 		
+ 		}); */
  	});
- 
  
  </script>
     

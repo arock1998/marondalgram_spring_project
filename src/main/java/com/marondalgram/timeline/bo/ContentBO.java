@@ -35,7 +35,8 @@ public class ContentBO {
 			content.setPost(post);
 			int postId = post.getId();
 
-//			likeBO.좋아요눌렸는가(postId);
+			boolean likeYn = likeBO.getLike(userId, postId);
+			content.setLikeYn(likeYn);
 			List<Comment> commentList = commentBO.getCommentList(postId);
 			content.setCommentList(commentList);
 			
@@ -43,29 +44,4 @@ public class ContentBO {
 		}
 		return contentViewList;
 	}
-
-//	public List<ContentView> generateContentViewList() {
-//		for(Post post: postList)
-//		{
-//			ContentView content = new ContentView();
-//			
-//			//글
-//			content.setPost(post);
-//			
-//			//댓글들
-//			content.setCommentList();
-//			
-//			//댓글 목록을 가지고온다. -> 글 id
-//			
-//			//내가 한 좋아요 여부
-//			//좋아요 -> userId, postId
-//			content.setLikeYn();
-//			
-//			//좋아요 개수
-//			//좋아요 -> postId
-//			content.setLikeCount();
-//			
-//		}
-//	}
-
 }
