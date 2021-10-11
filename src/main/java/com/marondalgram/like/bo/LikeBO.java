@@ -16,6 +16,10 @@ public class LikeBO {
 		return result > 0 ? true : false;
 	}
 	
+	public int countLike(int postId) {
+		return likeDAO.countLike(postId);
+	}
+	
 	public boolean likeChange(int userId, int postId, boolean likeYn) {
 		int result = 0;
 		if(likeYn) {

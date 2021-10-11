@@ -37,6 +37,8 @@ public class ContentBO {
 
 			boolean likeYn = likeBO.getLike(userId, postId);
 			content.setLikeYn(likeYn);
+			int countLike = likeBO.countLike(postId);
+			content.setLikeCount(countLike);
 			List<Comment> commentList = commentBO.getCommentList(postId);
 			content.setCommentList(commentList);
 			

@@ -44,7 +44,8 @@
 						<c:if test="${content.likeYn eq true}">
 							<img src="/images/icon/fillheart.png" class="fillHeart" width="80px">
 						</c:if>
-					</a>
+					</a> 
+					<span>${content.likeCount } 개</span>
 					</div>
 				</div>
 			<!-- 댓글 창 -->

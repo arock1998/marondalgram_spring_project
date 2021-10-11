@@ -10,6 +10,15 @@
 			`like`
 		WHERE `userId` = ${userId} AND `postId` = ${postId}
 	</select>
+	
+	<select id="countLike" resultType="int">
+		SELECT  
+			COUNT(`userId`)
+		FROM
+			`like`
+		WHERE 
+			`postId` = ${postId}
+	</select>
 
 	<insert id="insertLikeByUserIdAndPostID" parameterType="map" >
 		INSERT INTO 
