@@ -22,6 +22,10 @@ public class CommentBO {
 		commentDAO.insertComment(userId, userName, postId, comment);
 	}
 	
+	public void deleteCommentByCommentId(int commentId) {
+		commentDAO.deleteCommentByCommentId(commentId);
+	}
+	
 	public void deleteCommentByPostId(int postId) {
 		commentDAO.deleteCommentByPostId(postId);
 	}

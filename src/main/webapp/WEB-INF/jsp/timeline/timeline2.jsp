@@ -65,6 +65,7 @@
 					<div class="d-flex">
 						<div class="col-2">${comment.userName }</div>
 						<div>${comment.comment }</div>
+						<a class="deleteComment" href="#" data-comment-id=${comment.id }>삭제하기</a>
 					</div>
 				</c:forEach>
 				<div class="d-flex m-1">
@@ -143,6 +144,31 @@
 				}
 			});
 		});
+		
+		//댓글 삭제
+		$('.deleteComment').on('click', function(e){
+			e.preventDefault();
+			let commentId = $(this).data('comment-id');
+			alert('commentId' + commentId);
+			
+			$.ajax({
+				type:'post'
+				, url: '/comment/delete'
+				, data : {'commentId': commentId}
+				, success : function(data){
+					if(data.result == 'success'){
+						alert('댓글이 삭제되었습니다.');
+						location.reload();
+					}else {
+						alert('실패');
+					}
+				}
+				, error : function(e){
+					alert('error:' + e);
+				}
+			})
+		});
+		
 
 		//modal에 postId 데이터 전달
 		$('.contentMenuBtn').on('click', function(e) {

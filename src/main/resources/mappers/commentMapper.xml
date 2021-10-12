@@ -39,6 +39,13 @@
 		)
 	</insert>
 	
+	<delete id="deleteCommentByCommentId">
+		DELETE FROM
+			`comment`
+		WHERE
+			`id` = ${commentId}
+	</delete>
+	
 	<delete id="deleteCommentByPostId">
 		DELETE FROM
 			`comment`
