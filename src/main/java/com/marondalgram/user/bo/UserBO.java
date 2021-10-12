@@ -1,5 +1,7 @@
 package com.marondalgram.user.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ public class UserBO {
 	public void insertUser(String loginId, String password, String name,
 			String phoneNumber, String birth, String gender, String email) {
 		userDAO.insertUser(loginId, password, name, phoneNumber, birth, gender, email);
+	}
+	
+	public User getUserProfile(int friendId) {
+		return userDAO.selectUserProfile(friendId);
 	}
 
 }

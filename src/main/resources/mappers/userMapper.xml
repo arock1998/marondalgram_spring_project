@@ -21,6 +21,20 @@
 			`loginId` = #{loginId} AND `password` = #{password}
 	</select>
 	
+	<select id="selectUserProfile" resultType="com.marondalgram.user.model.User" >
+		SELECT 
+			`id`
+			, `loginId`
+			, `name`
+			, `gender`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id};
+	<!-- <result column="student_no" property="studentNo"/>
+		resultType:hashMap -->
+	</select>
+	
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		( 	

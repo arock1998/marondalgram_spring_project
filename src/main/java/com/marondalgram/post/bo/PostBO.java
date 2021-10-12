@@ -28,6 +28,10 @@ public class PostBO {
 	private FileManagerService fileManagerService;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	public Post getPost(int postId) {
+		return postDAO.selectPost(postId);
+	}
+	
 	public List<Post> getPostList(int userId){
 		return postDAO.selectPostList(userId);
 	}
@@ -49,13 +53,26 @@ public class PostBO {
 	}
 	
 	public void deletePost(int postId) {
+		Post post =  getPost(postId);
+		if(post == null) {
+			logger.error("[delete post] 삭제할 게시물이 없습니다.");
+			return;
+		}
+		
+		
 		postDAO.deletePost(postId);
 		commentBO.deleteCommentByPostId(postId);
 		likeBO.deleteLikeByPostId(postId);
 		
+		//그림삭제
+		String imageURL = post.getImageURL();
+		if(imageURL != null) {
+			try {
+				fileManagerService.deleteFile(imageURL);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				logger.error("[delete post] 그림 삭제 실패 postId: {}, path: {}", postId, imageURL);
+			}
+		}
 	}
-	
-	
-	
-	
 }	

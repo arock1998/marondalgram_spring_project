@@ -11,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.marondalgram.timeline.bo.ContentBO;
+import com.marondalgram.timeline.bo.ProfileBO;
 
 @Controller
 public class TimelineController {
 	
 	@Autowired
 	private ContentBO contentBO;
+	@Autowired
+	private ProfileBO profileBO;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping("/timeline/timeline")
@@ -31,11 +34,12 @@ public class TimelineController {
 			return "redirect:/user/sign_in_view";
 		}
 		
-		//타임라인에서 contentView 받아오기
+		//타임라인에 친구목록을 구성		
+		model.addAttribute("friendList", profileBO.generateProfileViewListById(userId) );
+		
+		//타임라인에 contentView 받아오기
 		model.addAttribute("contentList", contentBO.generateContentViewListById(userId));
 		model.addAttribute("viewName", "timeline/timeline2");
-//		List<Post> postList = postBO.getPostList(userId);
-//		model.addAttribute("postList", postList);
 		return "template/layout";
 	}
 	

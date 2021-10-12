@@ -1,5 +1,7 @@
 package com.marondalgram.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,8 @@ public interface UserDAO {
 			@Param("loginId") String loginId
 			, @Param("password") String password
 			);
+	
+	public User selectUserProfile(int friendId);
 	
 	public void insertUser(
 			@Param("loginId") String loginId
